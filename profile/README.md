@@ -1,82 +1,99 @@
-# Banzami
+# BANZA
 
-**Open financial infrastructure for programmable payments, operators and settlement systems.**
+**Open financial protocol for programmable payments, operators, wallets, settlement, and certification.**
 
-Banzami is a protocol-first, open-source financial kernel designed for the African financial ecosystem. It defines the rules — wallets, transfers, ledger, settlement, traceability — so that any operator can build certified payment infrastructure without reinventing financial primitives.
+BANZA is a protocol-first, open financial infrastructure layer for wallet-native payments, transfers, settlement, traceability, and certified operators. It defines the rules — financial invariants, open contracts, certification criteria, and a federation/trust model — that any operator can implement to build certified payment infrastructure without reinventing financial primitives.
+
+BANZA is a **specification, not a product**: it does not process payments, hold funds, or belong to any operator.
 
 ---
 
 ## Ecosystem
 
-| Repository | Description |
-|------------|-------------|
-| [banzami/banzami](https://github.com/banzami/banzami) | Open financial kernel — the protocol specification, Rust core, SDKs, and conformance suite |
-| [banzami/banzamia](https://github.com/banzami/banzamia) | AI-native interface for building, validating and certifying Banzami operators |
-| banzami/banza | First commercial operator — closed source |
+| Repository | Role |
+|---|---|
+| [`banza-protocol/banza`](https://github.com/banza-protocol/banza) | Open financial protocol — specifications, schemas, contracts, certification framework, and conformance suite |
+| [`banza-protocol/banzami`](https://github.com/banza-protocol/banzami) | First commercial operator / payment network built on BANZA (reference Rust core and client SDKs) |
+| [`banza-protocol/banzai`](https://github.com/banza-protocol/banzai) | AI-native knowledge, validation, certification, and governance layer for BANZA |
+| [`banza-protocol/.github`](https://github.com/banza-protocol/.github) | Organization profile and public metadata |
+
+> **BANZA is the protocol. Banzami is one operator built on it. BanzAI is the AI knowledge/certification layer.**
+> Operators implement BANZA — Banzami operates on top of BANZA.
 
 ---
 
-## What Banzami is
+## What BANZA is
 
-- A **protocol specification** — wallet model, transfer protocol, QR payments, ledger, settlement, traces
-- A **Rust financial core** — reference implementation with financial invariant enforcement
-- A **conformance suite** — certification levels 0–4 for operators
-- An **SDK ecosystem** — TypeScript, Flutter/Dart, PHP, Go
-- An **AI orchestration layer** — BanzamIA for certification, onboarding and governance
+- A **protocol specification** — wallet model, transfer protocol, QR payments, ledger, settlement, traceability, and operator rules.
+- **Open contracts and schemas** — OpenAPI, webhook schemas, QR payload, and event/federation contracts.
+- A **conformance suite** — deterministic certification, levels L0–L4, for operators.
+- A **trust and federation model** — a PKI hierarchy, operator certificates, and inter-operator routing.
+- An **AI-assisted knowledge layer** — through BanzAI, for validation, onboarding, certification guidance, and documentation navigation.
 
-## What Banzami is not
+Reference implementations — a Rust financial core and client SDKs (TypeScript, Flutter/Dart, and others) — live in the reference operator (`banzami`), demonstrating conformance. BANZA itself is **contract-first**: any language or stack that satisfies the contracts and passes the conformance suite is a valid implementation. There is no mandated SDK, language, or infrastructure.
 
-- A payment processor
-- A bank or money transmitter
-- A proprietary platform with vendor lock-in
+## What BANZA is not
+
+- A commercial payment app.
+- A bank.
+- A money transmitter.
+- A closed, proprietary platform.
+- A single operator.
+- Banzami itself.
+
+Banzami is only one operator built on BANZA. If every operator stopped tomorrow, BANZA — its rules, contracts, invariants, certification criteria, and federation model — would remain fully valid and available to any new operator.
 
 ---
 
 ## Financial invariants
 
-Banzami is built around six non-negotiable financial properties:
+BANZA is built around six non-negotiable financial properties — enforced by the protocol, verified by the conformance suite, regardless of implementation technology:
 
-| Invariant | Rule |
-|-----------|------|
-| INV-LEDGER-001 | Every transfer → equal DEBIT + CREDIT |
-| INV-LEDGER-002 | No wallet may reach negative balance |
-| INV-LEDGER-003 | Ledger entries are immutable once confirmed |
-| INV-STL-001 | `net + fee == gross` (no money creation) |
-| INV-STL-002 | Each transfer in exactly one settlement batch |
-| INV-TRACE-001 | All entities in a flow share the same `trace_id` |
+| Family | Guarantee |
+|---|---|
+| `INV-LEDGER-*` | Double-entry, immutability, integer precision, atomic postings |
+| `INV-WALLET-*` | No negative balance; balances are always ledger-derived |
+| `INV-SETTLE-*` | `gross = net + fee` — no money creation; settlement amount identity |
+| `INV-IDEM-*` | The same idempotency key always produces the same result |
+| `INV-RECON-*` | Posting linkage; externally reconcilable |
+| `INV-QR-*` | Unique resolution; single-use dynamic QR; expiry enforcement |
 
 ---
 
 ## Operator certification
 
-Operators implement the Banzami protocol and get certified at one of five levels:
+Operators implement the BANZA protocol and get certified at one of five levels — verified by a deterministic conformance suite, never by self-declaration:
 
 | Level | Name |
-|-------|------|
-| 0 | Reference-compatible |
-| 1 | Protocol-compatible |
-| 2 | Trace-compatible |
-| 3 | Federation-ready |
-| 4 | Settlement-compatible |
+|---|---|
+| L0 | Protocol Sandbox |
+| L1 | Core Payment Capability |
+| L2 | Payment Initiation Capability |
+| L3 | Inter-Operator Interoperability |
+| L4 | External Interoperability |
 
-Run the conformance suite against your operator at any level using the tools in [banzami/banzami](https://github.com/banzami/banzami).
+L3 opens federation: certified operators route payments to one another without bilateral agreements. The **BANZA CA** issues certificates; **BanzAI** explains the criteria but never certifies.
+
+Run the conformance suite against your operator using the tools in [`banza-protocol/banza`](https://github.com/banza-protocol/banza).
 
 ---
 
 ## Contributing
 
-Banzami is open source. Contributions are welcome in:
+BANZA is open source. Contributions are welcome in:
 
 - The protocol specification (RFCs, ADRs)
-- The Rust financial core
-- The SDK implementations
+- The open contracts and schemas
 - The conformance suite
 - The documentation
+- BanzAI protocol knowledge and validation workflows
 
-See [CONTRIBUTING.md](https://github.com/banzami/banzami/blob/main/CONTRIBUTING.md) to get started.
+See the contributing guides in each repository to get started.
 
 ---
 
 ## Website
 
-[banzami.org](https://banzami.org) — protocol documentation, operator registry, and developer resources.
+[banzami.org](https://banzami.org) — public documentation for the BANZA ecosystem, including protocol documentation, operator registry, developer resources, and Banzami operator information.
+
+Contact: [contact@banzami.org](mailto:contact@banzami.org)
